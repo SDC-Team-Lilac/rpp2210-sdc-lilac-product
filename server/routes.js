@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-var controller = require('./controllers');
+// var controller = require('./controllers');
 
-
+console.log('PLEASE WORK')
 
 router.get('/products', (req, res) => {
   res.send('Accessing /products')
