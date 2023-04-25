@@ -14,7 +14,6 @@ router.get('/products/:product_id/related', controllers.related.get);
 
 router.get('/cart', controllers.cart.get);
 
-
 router.post('/cart', controllers.cart.post);
 
 module.exports = router;
