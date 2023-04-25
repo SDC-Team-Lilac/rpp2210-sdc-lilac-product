@@ -1,32 +1,20 @@
 const express = require("express");
 const router = express.Router();
-// var controller = require('./controllers');
+const controllers = require('./controllers');
 
-console.log('PLEASE WORK')
+console.log('CONTROLLER', controllers);
 
-router.get('/products', (req, res) => {
-  res.send('Accessing /products')
-})
+router.get('/products', controllers.product.getAll);
 
-router.get('/products/:product_id', (req, res) => {
-  res.send('Accessing /products with ID')
-})
+router.get('/products/:product_id', controllers.product.getOne);
 
-router.get('/products/:product_id/styles', (req, res) => {
-  res.send('Accessing /product styles')
-})
+router.get('/products/:product_id/styles', controllers.styles.get);
 
-router.get('/products/:product_id/related', (req, res) => {
-  res.send('Accessing /product related')
-})
+router.get('/products/:product_id/related', controllers.related.get);
 
-router.get('/cart', (req, res) => {
-  res.send('getting  /cart')
-})
+router.get('/cart', controllers.cart.get);
 
 
-router.post('/cart', (req, res) => {
-  res.send('posting /cart')
-})
+router.post('/cart', controllers.cart.post);
 
 module.exports = router;
