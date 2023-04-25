@@ -2,8 +2,6 @@ const express = require("express");
 const router = express.Router();
 const controllers = require('./controllers');
 
-console.log('CONTROLLER', controllers);
-
 router.get('/products', controllers.product.getAll);
 
 router.get('/products/:product_id', controllers.product.getOne);
