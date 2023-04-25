@@ -1,18 +1,16 @@
 const { Pool } = require('pg');
+require('dotenv').config();
 
-console.log('POOL!')
+console.log('process.env!', process.env)
 const pool = new Pool ({
-  user: 'christian',
-  host: 'localhost',
-  database: 'sdc',
-  password: '123mystery',
-  port: 5432
+  user: process.env.USER,
+  host: process.env.HOST,
+  database: process.env.DATABASE,
+  password: process.env.PASSWORD,
+  port: process.env.PORT
 })
 
 pool.connect()
-.then((client) => {
-  return client.query('CREATE SCHEMA IF NOT EXISTS SDC')
-})
 .then((res) => {console.log('Schema created succesfully')})
 .catch((err) => {console.log(err)})
 .finally(()=> {pool.release()})

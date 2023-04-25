@@ -56,7 +56,7 @@ CREATE SCHEMA sdc
       ON DELETE CASCADE
   )
   CREATE TABLE cart (
-    id PRIMARY KEY,
+    cart_id integer PRIMARY KEY,
     user_session integer,
     product_id integer,
     active integer,
@@ -65,13 +65,11 @@ CREATE SCHEMA sdc
       ON DELETE CASCADE
   )
   CREATE TABLE related_products (
+    related_id integer PRIMARY KEY,
     product_id integer,
     related_product_id integer,
       FOREIGN KEY(product_id)
         REFERENCES product(product_id)
-         ON DELETE CASCADE,
-      FOREIGN KEY(related_product_id)
-        REFERENCES product(product_id)
-        ON DELETE CASCADE
+         ON DELETE CASCADE
   );
 
