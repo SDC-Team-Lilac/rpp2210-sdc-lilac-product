@@ -1,7 +1,6 @@
 const { Pool } = require('pg');
 require('dotenv').config();
 
-console.log('process.env!', process.env)
 const pool = new Pool ({
   user: process.env.USER,
   host: process.env.HOST,
@@ -10,7 +9,9 @@ const pool = new Pool ({
   port: process.env.PORT
 })
 
-pool.connect()
-.then((res) => {console.log('Schema created succesfully')})
-.catch((err) => {console.log(err)})
-.finally(()=> {pool.release()})
+module.exports = {
+  query: (text, params) => {
+    console.log('Query submitted', { text, params })
+    return pool.query(text, params)
+  }
+}
