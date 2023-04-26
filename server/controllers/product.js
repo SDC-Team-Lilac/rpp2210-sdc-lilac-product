@@ -1,9 +1,9 @@
 
 module.exports = {
-  getAll: function(req, res) {
+  getAll: (req, res) => {
     res.send('Getting all products in controllers')
   },
-  getOne: function(req, res) {
+  getOne: (req, res) => {
     res.send('Getting one product in controllers')
   }
 }

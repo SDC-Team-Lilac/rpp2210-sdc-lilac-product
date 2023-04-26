@@ -1,5 +1,5 @@
 module.exports = {
-  get: function(req, res) {
+  get: (req, res) => {
     res.send('Getting productStyles in controllers')
   }
 }
