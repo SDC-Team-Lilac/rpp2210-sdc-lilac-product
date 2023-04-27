@@ -10,6 +10,6 @@ module.exports = {
   },
   getOne: (product_id) => {
     console.log('THIS IS THE ID', product_id)
-    return db.query('SELECT sdc.product.product_id AS id, product_name AS name, slogan, product_description AS description, sdc.category.category_name AS category, default_price, feature, feature_value AS value FROM sdc.product JOIN sdc.category ON sdc.product.category_id = sdc.category.category_id JOIN sdc.product_features ON sdc.product.product_id = sdc.product_features.product_id WHERE sdc.product.product_id = $1;',[product_id])
+    return db.query("SELECT sdc.product.product_id AS id, product_name AS name, slogan, product_description AS description, sdc.category.category_name AS category, JSON_AGG(JSON_BUILD_OBJECT('feature', feature, 'value', feature_value)) AS features FROM sdc.product JOIN sdc.category ON sdc.product.category_id = sdc.category.category_id INNER JOIN sdc.product_features USING (product_id) WHERE sdc.product.product_id = 2 GROUP BY sdc.product.product_id, sdc.category.category_id;")
   }
 }
