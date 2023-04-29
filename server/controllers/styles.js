@@ -1,5 +1,9 @@
+const models = require('../models');
+
 module.exports = {
   get: (req, res) => {
-    res.send('Getting productStyles in controllers')
+    models.styles.get(req.params.product_id)
+    .then((result) => {res.status(200).send(result.rows)})
+    .catch((err) => {res.status(500).send('ERROR getting product style data')})
   }
 }

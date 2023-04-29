@@ -73,3 +73,9 @@ CREATE SCHEMA sdc
          ON DELETE CASCADE
   );
 
+
+CREATE INDEX product_styles_product_id_idx ON sdc.product_styles(product_id);
+
+CREATE INDEX photos_style_id_idx ON sdc.photos(style_id);
+
+CREATE INDEX sku_style_id_idx ON sdc.sku(style_id);
