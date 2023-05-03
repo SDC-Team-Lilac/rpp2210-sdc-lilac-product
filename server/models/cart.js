@@ -5,3 +5,5 @@ module.exports = {
    return db.query('SELECT * FROM sdc.cart;')
   }
 }
+
+//I was informed that CARTS can be ignored.
