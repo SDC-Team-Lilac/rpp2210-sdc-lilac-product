@@ -26,7 +26,7 @@ describe('GET /products/:product_id', () => {
     const response = await request(baseURL).get("/products/1");
     expect(response.statusCode).toBe(200);
   })
-  test('return all products with the expected properties', async() => {
+  test('return single product with the expected properties', async() => {
     const response = await request(baseURL).get("/products/1");
     expect(Array.isArray(response.body)).toBe(true);
     expect(response.body[0]).toHaveProperty('id');
