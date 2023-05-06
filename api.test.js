@@ -28,6 +28,7 @@ describe('GET /products/:product_id', () => {
   })
   test('return all products with the expected properties', async() => {
     const response = await request(baseURL).get("/products/1");
+    expect(Array.isArray(response.body)).toBe(true);
     expect(response.body[0]).toHaveProperty('id');
     expect(response.body[0]).toHaveProperty('name');
     expect(response.body[0]).toHaveProperty('slogan');
@@ -35,19 +36,37 @@ describe('GET /products/:product_id', () => {
     expect(response.body[0]).toHaveProperty('category');
     expect(response.body[0]).toHaveProperty('default_price');
     expect(response.body[0]).toHaveProperty('features');
-
+    expect(Array.isArray(response.body[0].features)).toBe(true);
+    expect(response.body[0].features[0]).toHaveProperty('feature');
+    expect(response.body[0].features[0]).toHaveProperty('value');
+    expect(response.body[0].features[1]).toHaveProperty('feature');
+    expect(response.body[0].features[1]).toHaveProperty('value');
   })
 })
 // //router.get('/products/:product_id/styles', controllers.styles.get);
-// describe('GET /products/:product_id/styles', () => {
-//   test('succesfully return a 200 response', async() => {
-//     const response = await request(baseURL).get("/products/12/styles");
-//     expect(response.statusCode).toBe(200);
-//   })
-//   test('return the data in the expected format', () => {
-//     expect(sum(1,2)).toBe(3);
-//   })
-// })
+describe('GET /products/:product_id/styles', () => {
+  test('succesfully return a 200 response', async() => {
+    const response = await request(baseURL).get("/products/12/styles");
+    expect(response.statusCode).toBe(200);
+  })
+  test('return the styles with the expected properties', async () => {
+    const response = await request(baseURL).get("/products/12/styles");
+    expect(response.body).toHaveProperty('product_id');
+    expect(response.body).toHaveProperty('results');
+    expect(Array.isArray(response.body.results)).toBe(true);
+    expect(response.body[0]).toHaveProperty('style_id');
+    expect(response.body[0]).toHaveProperty('name');
+    expect(response.body[0]).toHaveProperty('original_price');
+    expect(response.body[0]).toHaveProperty('sale_price');
+    expect(response.body[0]).toHaveProperty('default?');
+    expect(response.body[0]).toHaveProperty('photos');
+    expect(Array.isArray(response.body.results[0].photos)).toBe(true);
+    expect(response.body[0].photos).toHaveProperty('thumbnail_url');
+    expect(response.body[0].photos).toHaveProperty('url');
+    expect(typeof response.body.results[0].skus).toBe('object');
+
+  })
+})
 
 // //router.get('/products/:product_id/related', controllers.related.get);
 // describe('GET /products/:product_id/related', () => {
