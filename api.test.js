@@ -1,15 +1,16 @@
 const request = require("supertest");
 require('dotenv').config();
-const baseURL = process.env.BASEURL
+// const baseURL = process.env.BASEURL
+const app = require('./server/index.js')
 
 //router.get('/products', controllers.product.getAll);
 describe('GET /products', () => {
   test('succesfully return a 200 response', async() => {
-    const response = await request(baseURL).get("/products");
+    const response = await request(app).get("/products");
     expect(response.statusCode).toBe(200);
   })
   test('return all products with the expected properties', async() => {
-    const response = await request(baseURL).get("/products");
+    const response = await request(app).get("/products");
     expect(response.body[0]).toHaveProperty('id');
     expect(response.body[0]).toHaveProperty('name');
     expect(response.body[0]).toHaveProperty('slogan');
@@ -23,34 +24,34 @@ describe('GET /products', () => {
 //router.get('/products/:product_id', controllers.product.getOne);
 describe('GET /products/:product_id', () => {
   test('succesfully return a 200 response', async() => {
-    const response = await request(baseURL).get("/products/1");
+    const response = await request(app).get("/products/1");
     expect(response.statusCode).toBe(200);
   })
   test('return single product with the expected properties', async() => {
-    const response = await request(baseURL).get("/products/1");
-    expect(Array.isArray(response.body)).toBe(true);
-    expect(response.body[0]).toHaveProperty('id');
-    expect(response.body[0]).toHaveProperty('name');
-    expect(response.body[0]).toHaveProperty('slogan');
-    expect(response.body[0]).toHaveProperty('description');
-    expect(response.body[0]).toHaveProperty('category');
-    expect(response.body[0]).toHaveProperty('default_price');
-    expect(response.body[0]).toHaveProperty('features');
-    expect(Array.isArray(response.body[0].features)).toBe(true);
-    expect(response.body[0].features[0]).toHaveProperty('feature');
-    expect(response.body[0].features[0]).toHaveProperty('value');
-    expect(response.body[0].features[1]).toHaveProperty('feature');
-    expect(response.body[0].features[1]).toHaveProperty('value');
+    const response = await request(app).get("/products/1");
+    expect(Array.isArray(response.body)).toBe(false);
+    expect(response.body).toHaveProperty('id');
+    expect(response.body).toHaveProperty('name');
+    expect(response.body).toHaveProperty('slogan');
+    expect(response.body).toHaveProperty('description');
+    expect(response.body).toHaveProperty('category');
+    expect(response.body).toHaveProperty('default_price');
+    expect(response.body).toHaveProperty('features');
+    expect(Array.isArray(response.body.features)).toBe(true);
+    expect(response.body.features[0]).toHaveProperty('feature');
+    expect(response.body.features[0]).toHaveProperty('value');
+    expect(response.body.features[1]).toHaveProperty('feature');
+    expect(response.body.features[1]).toHaveProperty('value');
   })
 })
 // //router.get('/products/:product_id/styles', controllers.styles.get);
 describe('GET /products/:product_id/styles', () => {
   test('succesfully return a 200 response', async() => {
-    const response = await request(baseURL).get("/products/12/styles");
+    const response = await request(app).get("/products/12/styles");
     expect(response.statusCode).toBe(200);
   })
   test('return the styles with the expected properties', async () => {
-    const response = await request(baseURL).get("/products/12/styles");
+    const response = await request(app).get("/products/12/styles");
     expect(response.body).toHaveProperty('product_id');
     expect(response.body).toHaveProperty('results');
     expect(Array.isArray(response.body.results)).toBe(true);
@@ -71,11 +72,11 @@ describe('GET /products/:product_id/styles', () => {
 // //router.get('/products/:product_id/related', controllers.related.get);
 describe('GET /products/:product_id/related', () => {
   test('succesfully return a 200 response', async () => {
-    const response = await request(baseURL).get("/products/4/related");
+    const response = await request(app).get("/products/4/related");
     expect(response.statusCode).toBe(200);
   })
   test('return the related products with the expected properties', async () => {
-    const response = await request(baseURL).get("/products/4/related");
+    const response = await request(app).get("/products/4/related");
     expect(Array.isArray(response.body)).toBe(true);
   })
 })

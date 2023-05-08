@@ -8,7 +8,7 @@ module.exports = {
   },
   getOne: (req, res) => {
    models.product.getOne(req.params.product_id)
-   .then((result) => {res.status(200).send(result.rows)})
+   .then((result) => {res.status(200).send(result.rows[0])})
    .catch((err) => {res.status(500).send('ERROR getting one product\'s data ')})
   }
 }
