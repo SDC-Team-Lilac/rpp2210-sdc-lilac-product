@@ -76,6 +76,12 @@ CREATE SCHEMA sdc
 
 CREATE INDEX product_styles_product_id_idx ON sdc.product_styles(product_id);
 
+CREATE INDEX product_features_product_id_idx ON sdc.product_features(product_id);
+
+CREATE INDEX idx_related_products_product_id ON sdc.related_products (product_id);
+
 CREATE INDEX photos_style_id_idx ON sdc.photos(style_id);
 
 CREATE INDEX sku_style_id_idx ON sdc.sku(style_id);
+
+CREATE INDEX category_id_idx ON sdc.product(category_id);
