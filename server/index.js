@@ -1,11 +1,12 @@
 const express = require('express');
 const app = express();
 const port = 3001;
+const host = '0.0.0.0'
 const routes = require('./routes.js')
 
 app.use("/", routes);
 
-app.listen(port, () => {
+app.listen(port, host, () => {
   console.log(`Example app listening on port ${port}`)
 })
 
