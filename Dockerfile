@@ -14,7 +14,7 @@ RUN rm -fr node_modules \
     && rm -fr coverage \
     && rm -fr k6
 
-EXPOSE 3000
+EXPOSE 8080
 
 # Start the app using serve command
 CMD [ "node", "server/index.js" ]
