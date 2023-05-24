@@ -1,0 +1,62 @@
+scp -i ~/Downloads/sdc-lilac.pem ./data/category.csv ubuntu@18.205.163.62:/home
+scp -i ~/Downloads/sdc-lilac.pem ~/Hack\ Reactor/sdc/data/styles.csv ubuntu@ec2-18-205-163-62.compute-1.amazonaws.com:~/home
+scp -i ~/Downloads/sdc-lilac.pem ~/Hack\ Reactor/sdc/rpp2210-sdc-lilac-product/server/db/pg.sql ubuntu@ec2-18-205-163-62.compute-1.amazonaws.com:~/home
+
+
+docker run -d  image:tag
+docker run --name some-postgres -e POSTGRES_PASSWORD=123mystery! -p 5432:5432 -v /home:/home -d postgres
+
+
+\copy sdc.category(category_id, category_name)
+FROM '/home/ubuntu/home/category.csv'
+DELIMITER ','
+CSV HEADER;
+
+\copy sdc.product(product_id, product_name, slogan, product_description, default_price, category_id)
+FROM '/home/ubuntu/home/product.csv'
+DELIMITER ','
+CSV HEADER;
+
+
+--PRODUCT_FEATURES--
+\copy sdc.product_features(feature_id, product_id, feature, feature_value)
+FROM '/home/ubuntu/home/features.csv'
+DELIMITER ','
+CSV HEADER;
+--
+
+--PRODUCT_STYLES--
+\copy sdc.product_styles(style_id, product_id, style_name, sale_price, original_price, style_default)
+FROM '/home/ubuntu/home/styles.csv'
+DELIMITER ','
+NULL 'null'
+CSV HEADER;
+--
+
+--PHOTOS--
+\copy sdc.photos(photo_id, style_id, url, thumbnail_url)
+FROM '/home/ubuntu/home/photos.csv'
+DELIMITER ','
+CSV HEADER;
+--
+
+--SKU--
+\copy sdc.sku(sku_id, style_id, size, quantity)
+FROM '/home/ubuntu/home/skus.csv'
+DELIMITER ','
+CSV HEADER;
+--
+
+--CART--
+\copy sdc.cart(cart_id, user_session, product_id, active)
+FROM '/home/ubuntu/home/cart.csv'
+DELIMITER ','
+CSV HEADER;
+--
+
+--RELATED_PRODUCTS--
+\copy sdc.related_products(related_id, product_id, related_product_id)
+FROM '/home/ubuntu/home/related.csv'
+DELIMITER ','
+CSV HEADER;
+--

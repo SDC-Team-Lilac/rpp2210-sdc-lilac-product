@@ -4,7 +4,7 @@ module.exports = {
   getAll: (req, res) => {
     models.product.getAll(req.query)
     .then((result) => {res.status(200).send(result.rows)})
-    .catch((err) => {res.status(500).send('ERROR getting all product data')})
+    .catch((err) => {res.status(500).send('ERROR getting all product data'); console.log(err)})
   },
   getOne: (req, res) => {
    models.product.getOne(req.params.product_id)

@@ -3,7 +3,7 @@ DROP SCHEMA IF EXISTS sdc CASCADE;
 
 CREATE SCHEMA sdc
   CREATE TABLE category (
-    category_id PRIMARY KEY,
+    category_id integer PRIMARY KEY,
     category_name varchar UNIQUE NOT NULL
   )
   CREATE TABLE product (
@@ -18,7 +18,7 @@ CREATE SCHEMA sdc
       ON DELETE CASCADE
   )
   CREATE TABLE product_features (
-    feature_id PRIMARY KEY,
+    feature_id integer PRIMARY KEY,
     feature varchar,
     feature_value varchar,
     product_id integer,
@@ -38,7 +38,7 @@ CREATE SCHEMA sdc
       ON DELETE CASCADE
   )
   CREATE TABLE photos (
-    photo_id PRIMARY KEY,
+    photo_id integer PRIMARY KEY,
     thumbnail_url varchar,
     url varchar,
     style_id integer,
@@ -85,3 +85,5 @@ CREATE INDEX photos_style_id_idx ON sdc.photos(style_id);
 CREATE INDEX sku_style_id_idx ON sdc.sku(style_id);
 
 CREATE INDEX category_id_idx ON sdc.product(category_id);
+
+CREATE INDEX idx_product_id ON sdc.product (product_id);

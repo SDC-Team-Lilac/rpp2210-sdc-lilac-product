@@ -1,0 +1,17 @@
+services:
+  app:
+    image: lilac-product-2
+    command: sh -c "npm install & npm start"
+    ports:
+      - 8080:8080
+    working_dir: /app
+    env_file:
+      .env
+
+
+  postgres:
+    image: postgres:alpine3.18
+    ports:
+     - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: ${PASSWORD}
