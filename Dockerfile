@@ -16,5 +16,11 @@ RUN rm -fr node_modules \
 
 EXPOSE 8080
 
+ENV NEW_RELIC_NO_CONFIG_FILE=true
+
+ENV NEW_RELIC_DISTRIBUTED_TRACING_ENABLED=true \
+NEW_RELIC_LOG=stdout
+# etc.
+
 # Start the app using serve command
 CMD [ "node", "server/index.js" ]
